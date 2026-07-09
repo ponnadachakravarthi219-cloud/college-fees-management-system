@@ -1,0 +1,40 @@
+.dashboard-container {
+  display: flex;
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 20px;
+  background: #f4f6f9;
+  min-height: 100vh;
+}
+
+.cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.card {
+  width: 220px;
+  padding: 20px;
+  color: white;
+  border-radius: 10px;
+}
+
+.blue {
+  background: #0d6efd;
+}
+
+.green {
+  background: #198754;
+}
+
+.red {
+  background: #dc3545;
+}
+
+.orange {
+  background: #fd7e14;
+}

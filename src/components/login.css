@@ -1,0 +1,14 @@
+.login-box input {
+  display: block;
+  width: 30%;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+.login-box button {
+  width: 30%;
+  padding: 10px;
+}
+.login-body{
+    background-color: aqua;
+}
