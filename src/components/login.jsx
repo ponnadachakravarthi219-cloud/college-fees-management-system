@@ -5,49 +5,125 @@ function Login({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (username === "admin" && password === "admin123") {
-      onLogin();
-    } else {
-      alert("Invalid Username or Password");
+    setError("");
+    setSuccess("");
+
+    // Validation
+    if (username.trim() === "" || password.trim() === "") {
+      setError("Please enter Username and Password");
+      return;
     }
+
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+
+      if (username === "admin" && password === "admin123") {
+        setSuccess("Login Successful! Welcome Admin.");
+
+        setTimeout(() => {
+          onLogin();
+        }, 1000);
+      } else {
+        setError("Invalid Username or Password");
+      }
+    }, 2000);
+  };
+
+  const handleClear = () => {
+    setUsername("");
+    setPassword("");
+    setError("");
+    setSuccess("");
   };
 
   return (
     <div className="login-container">
-      <h1>
-        College Fees Management System
-       
-        
-      </h1>
 
-      <form onSubmit={handleSubmit} className="login-box">
+      <div className="login-box">
+
+        <h1>College Fees Management System</h1>
+
         <h2>Login</h2>
 
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+        <form onSubmit={handleSubmit}>
 
-        <br />
-        <br />
+          <input
+            type="text"
+            placeholder="Enter Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+          <br /><br />
 
-        <br />
-        <br />
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-        <button type="submit">Login</button>
-      </form>
+          <br />
+
+          <button
+            type="button"
+            className="show-btn"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? "Hide Password" : "Show Password"}
+          </button>
+
+          <br /><br />
+
+          {loading ? (
+            <p className="loading">Loading...</p>
+          ) : null}
+
+          {error && (
+            <p className="error">{error}</p>
+          )}
+
+          {success && (
+            <p className="success">{success}</p>
+          )}
+
+          <button
+            type="submit"
+            disabled={loading}
+          >
+            {loading ? "Please Wait..." : "Login"}
+          </button>
+
+          <button
+            type="button"
+            onClick={handleClear}
+          >
+            Clear
+          </button>
+
+          <div className="links">
+
+            <a href="#">Forgot Password?</a>
+
+            <a href="#">Register</a>
+
+          </div>
+
+        </form>
+
+      </div>
+
     </div>
   );
 }

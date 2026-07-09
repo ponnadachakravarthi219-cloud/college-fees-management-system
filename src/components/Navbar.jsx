@@ -1,20 +1,24 @@
-function Navbar() {
-  return (
-    <nav
-      style={{
-        backgroundColor: "#0d6efd",
-        color: "white",
-        padding: "15px 20px",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
-      <h2>College Fees Management System</h2>
+import "./Navbar.css";
 
-      <div>
-        <span>Welcome, Admin</span>
+function Navbar({ onLogout }) {
+  return (
+    <nav className="navbar">
+
+      <div className="logo">
+        <h2>College Fees Management System</h2>
       </div>
+
+      <div className="nav-right">
+        <span>Welcome, Admin 👋</span>
+
+        <button
+          className="logout-btn"
+          onClick={onLogout}
+        >
+          Logout
+        </button>
+      </div>
+
     </nav>
   );
 }
