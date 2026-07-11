@@ -5,20 +5,12 @@ import Dashboard from "./components/Dashboard";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
-
   return (
     <>
       {isLoggedIn ? (
-        <Dashboard onLogout={handleLogout} />
+        <Dashboard onLogout={() => setIsLoggedIn(false)} />
       ) : (
-        <Login onLogin={handleLogin} />
+        <Login onLogin={() => setIsLoggedIn(true)} />
       )}
     </>
   );

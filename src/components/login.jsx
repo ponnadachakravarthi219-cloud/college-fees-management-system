@@ -114,9 +114,9 @@ function Login({ onLogin }) {
 
           <div className="links">
 
-            <a href="#">Forgot Password?</a>
+            <a href="#">I Don't Have account</a>
 
-            <a href="#">Register</a>
+            {/* <a href="#">Register</a> */}
 
           </div>
 

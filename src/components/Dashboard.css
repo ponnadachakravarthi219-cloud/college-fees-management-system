@@ -24,7 +24,7 @@
 .summary-card{
     flex:1;
     min-width:220px;
-    color:white;
+    color:rgb(7, 1, 1);
     padding:20px;
     border-radius:10px;
     box-shadow:0 4px 10px rgba(0,0,0,0.2);
@@ -52,12 +52,12 @@
     background:#198754;
 }
 
-.red{
-    background:#dc3545;
+.pink{
+    background:#dc35bd;
 }
 
-.orange{
-    background:#fd7e14;
+.yellow{
+    background:#ffe58f;
 }
 
 .empty-state{

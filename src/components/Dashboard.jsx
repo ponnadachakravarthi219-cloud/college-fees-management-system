@@ -40,22 +40,22 @@ function Dashboard({ onLogout }) {
           {/* Summary Cards */}
           <div className="summary-cards">
 
-            <div className="summary-card blue">
+            <div className="summary-card green">
               <h3>Total Students</h3>
               <h2>{students.length}</h2>
             </div>
 
-            <div className="summary-card green">
+            <div className="summary-card yellow ">
               <h3>Fees Paid</h3>
               <h2>{paidStudents}</h2>
             </div>
 
-            <div className="summary-card red">
+            <div className="summary-card pink">
               <h3>Pending Fees</h3>
               <h2>{pendingStudents}</h2>
             </div>
 
-            <div className="summary-card orange">
+            <div className="summary-card blue">
               <h3>Total Courses</h3>
               <h2>12</h2>
             </div>
@@ -64,13 +64,6 @@ function Dashboard({ onLogout }) {
 
           <StudentForm addStudent={addStudent} />
 
-          {/* Empty State */}
-          {students.length === 0 ? (
-            <div className="empty-state">
-              <h2>No Students Registered</h2>
-              <p>Please add a student using the form above.</p>
-            </div>
-          ) : (
             <>
               {/* Student Cards */}
               <h2>Student Cards</h2>
@@ -92,7 +85,7 @@ function Dashboard({ onLogout }) {
                 deleteStudent={deleteStudent}
               />
             </>
-          )}
+          
 
         </div>
 

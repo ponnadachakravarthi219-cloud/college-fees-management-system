@@ -4,8 +4,8 @@ function StudentTable({ students, deleteStudent }) {
   if (students.length === 0) {
     return (
       <div className="table-empty">
-        <h3>No Students Available</h3>
-        <p>Please register students to display the table.</p>
+        {/* <h3>No Students Available</h3>
+        <p>Please register students to display the table.</p> */}
       </div>
     );
   }
