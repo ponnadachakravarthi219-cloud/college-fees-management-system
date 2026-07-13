@@ -1,0 +1,30 @@
+.home{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#2563eb,#1e3a8a);
+color:white;
+}
+
+.home h1{
+font-size:42px;
+margin-bottom:20px;
+}
+
+.home p{
+font-size:22px;
+margin-bottom:30px;
+}
+
+.home button{
+padding:15px 35px;
+font-size:18px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+background:white;
+color:#2563eb;
+font-weight:bold;
+}

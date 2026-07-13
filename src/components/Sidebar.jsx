@@ -1,20 +1,28 @@
+import { Link } from "react-router-dom";
 import "./Sidebar.css";
 
-function Sidebar({ setPage }) {
+function Sidebar() {
   return (
     <div className="sidebar">
-      <h2 className="sidebar-title">MENU</h2>
 
-      <ul>
-       <li><Link to="/dashboard">🏠 Dashboard</Link></li>
-<li><Link to="/students">👨‍🎓 Students</Link></li>
-<li><Link to="/fees">💰 Fees</Link></li>
-<li><Link to="/reports">📊 Reports</Link></li>
-<li><Link to="/settings">⚙️ Settings</Link></li>
-<li><Link to="/login">🚪 Logout</Link></li>
-      </ul>
+      <h2>Menu</h2>
+
+      <Link to="/dashboard">Dashboard</Link>
+
+      <Link to="/students">Students</Link>
+
+      <Link to="/register">Register</Link>
+
+      <Link to="/fees">Fees</Link>
+
+      <Link to="/favorites">Favorites</Link>
+
+      <Link to="/recent">Recent</Link>
+
+      <Link to="/login">Logout</Link>
+
     </div>
   );
 }
 
-export default Sidebar;  
+export default Sidebar;

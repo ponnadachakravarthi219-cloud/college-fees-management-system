@@ -1,0 +1,22 @@
+.register{
+padding:40px;
+}
+
+.register form{
+display:flex;
+flex-direction:column;
+width:400px;
+gap:15px;
+}
+
+.register input{
+padding:12px;
+}
+
+.register button{
+padding:12px;
+background:#2563eb;
+color:white;
+border:none;
+cursor:pointer;
+}
