@@ -4,8 +4,8 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-background:linear-gradient(135deg,#2563eb,#1e3a8a);
-color:white;
+background:linear-gradient(135deg,#25e8eb,#1e8a85);
+color:rgb(0, 0, 0);
 }
 
 .home h1{

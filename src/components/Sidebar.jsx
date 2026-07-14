@@ -8,16 +8,17 @@ function Sidebar() {
       <h2>Menu</h2>
 
       <Link to="/dashboard">Dashboard</Link>
+      
+      
+       <Link to="/register">Register</Link>
 
       <Link to="/students">Students</Link>
 
-      <Link to="/register">Register</Link>
+      <Link to="/fees list">Fees</Link>
 
-      <Link to="/fees">Fees</Link>
+      {/* <Link to="/favorites">Favorites</Link> */}
 
-      <Link to="/favorites">Favorites</Link>
-
-      <Link to="/recent">Recent</Link>
+      {/* <Link to="/recent">Recent</Link> */}
 
       <Link to="/login">Logout</Link>
 

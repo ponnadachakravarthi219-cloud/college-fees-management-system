@@ -1,32 +1,5 @@
-// import "./Navbar.css";
-// import { useNavigate } from "react-router-dom";
-
-// function Navbar() {
-//   const navigate = useNavigate();
-
-//   const handleLogout = () => {
-//     navigate("/login");
-//   };
-
-//   return (
-//     <nav className="navbar">
-//       <div className="logo">
-//         <h2>College Fees Management System</h2>
-//       </div>
-
-//       <div className="nav-right">
-//         <span>Welcome, Admin 👋</span>
-
-//         <button className="logout-btn" onClick={handleLogout}>
-//           Logout
-//         </button>
-//       </div>
-//     </nav>
-//   );
-// }
-
-// export default Navbar;
-import logo from "../assets/images/logo.png.jpeg";
+import { NavLink } from "react-router-dom";
+import logo from "../assets/images/logo.jpg";
 import "./Navbar.css";
 
 function Navbar() {
@@ -43,10 +16,10 @@ function Navbar() {
       </div>
 
       <ul className="nav-links">
-        <li>Dashboard</li>
-        <li>Students</li>
-        <li>Fees</li>
-        <li>Logout</li>
+        <li><NavLink to="/">Home</NavLink></li>
+        <li> <NavLink to="/about">Students</NavLink></li>
+        <li> <NavLink to="/about">Fees</NavLink></li>
+        <li> <NavLink to="/about">Logout</NavLink></li>
       </ul>
 
     </nav>

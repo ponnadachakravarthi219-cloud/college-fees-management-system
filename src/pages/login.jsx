@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import loginImage from "../assets/images/login.jpg";
+import loginImage from "../assets/images/register.jpg";
+
 
 function Login() {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ function Login() {
       {/* Left Side Image */}
       <div className="left-panel">
         <img
-          src={Login.jpg}
+          src={loginImage}
           alt="College"
           className="login-image"
         />
@@ -42,11 +43,11 @@ function Login() {
       {/* Right Side Login Form */}
       <div className="right-panel">
 
-        <h1>College Fees Management</h1>
+        <h1>🎓College Fees Management</h1>
 
         <input
           type="email"
-          placeholder="Enter Email"
+          placeholder="🤷‍♀️Enter Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />

@@ -5,10 +5,11 @@ function Home() {
   return (
     <div className="home">
 
-      <h1>College Fees Management System</h1>
+      <h1>✨WELCOME TO FEES MANAGEMNT PORTAL✨</h1>
+      <h2>College Fees Management System </h2>
 
       <p>
-        React Frontend Project
+        To Check Your Fees, Total Fees, and Pending Fees. 
       </p>
 
       <Link to="/login">

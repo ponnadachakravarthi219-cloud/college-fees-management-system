@@ -31,12 +31,12 @@
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    background:#f8fafc;
+    background:#3ddfe4;
 }
 
 .right-panel h1{
     margin-bottom:30px;
-    color:#2563eb;
+    color:#030509;
 }
 
 .right-panel input{
@@ -60,7 +60,7 @@
     width:320px;
     padding:12px;
     background:#2563eb;
-    color:white;
+    color:rgba(255, 252, 252, 0.989);
     border:none;
     cursor:pointer;
     font-size:18px;

@@ -8,7 +8,7 @@
 .dashboard-content{
     display:flex;
     min-height:calc(100vh - 80px);
-    background:rgba(255,255,255,0.85);
+    background:rgba(255, 255, 255, 0.173);
 }
 
 .main-content{
@@ -17,7 +17,7 @@
 }
 
 .main-content h1{
-    color:#1e3a8a;
+    color:#e20202d8;
 }
 
 .main-content h2{
@@ -32,7 +32,7 @@
 }
 
 .card{
-    background:rgb(255, 179, 179);
+    background:rgba(237, 207, 99, 0.825);
     padding:25px;
     border-radius:15px;
     box-shadow:0 5px 15px rgba(0,0,0,0.2);
