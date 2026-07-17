@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Registerlogin from "./pages/Registerlogin";
 import "./Login.css";
 import loginImage from "../assets/images/register.jpg";
 
@@ -64,6 +65,7 @@ function Login() {
             type="checkbox"
             checked={showPassword}
             onChange={() => setShowPassword(!showPassword)}
+            
           />
           <span>Show Password</span>
         </div>
@@ -71,6 +73,12 @@ function Login() {
         <button onClick={handleLogin}>
           {loading ? "Logging in..." : "Login"}
         </button>
+        <p className="register-link">
+        New User?{" "}
+        <span onClick={() => navigate("/register")}>
+        Register Here
+        </span>
+         </p>
 
         <p className="message">{message}</p>
 

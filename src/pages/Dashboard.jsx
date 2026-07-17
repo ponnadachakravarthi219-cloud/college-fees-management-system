@@ -35,6 +35,7 @@ function Dashboard() {
               <h3>Pending Fees</h3>
               <h1>₹7,20,000</h1>
             </div>
+           
 
           </div>
         </div>

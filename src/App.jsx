@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
@@ -8,6 +7,8 @@ import StudentDetails from "./pages/StudentDetails";
 import Register from "./pages/Register";
 import Fees from "./pages/Fees";
 import NotFound from "./pages/NotFound";
+import Registerlogin from "./pages/Registerlogin";
+
 
 function App() {
   return (
@@ -17,9 +18,13 @@ function App() {
 
       <Route path="/login" element={<Login />} />
 
+      <Route path="/registerlogin" element={<Registerlogin />} />
+
       <Route path="/dashboard" element={<Dashboard />} />
 
       <Route path="/students" element={<Students />} />
+
+      
 
       <Route path="/student/:id" element={<StudentDetails />} />
 

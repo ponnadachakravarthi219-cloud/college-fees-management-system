@@ -71,6 +71,20 @@
 .right-panel button:hover{
     background:#1d4ed8;
 }
+.register-link {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.register-link span {
+  color: blue;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.register-link span:hover {
+  text-decoration: underline;
+}
 
 .message{
     margin-top:20px;

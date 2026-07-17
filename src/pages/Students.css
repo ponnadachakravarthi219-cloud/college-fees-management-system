@@ -148,3 +148,16 @@ td {
     border-radius:15px;
     box-shadow:0 8px 20px rgba(0,0,0,0.2);
 } 
+.edit-btn{
+    background:orange;
+    color:white;
+    border:none;
+    padding:8px 15px;
+    margin:0 5px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.edit-btn:hover{
+    background:darkorange;
+}

@@ -1,16 +1,18 @@
-// export default Register;
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import loginImage from "../assets/images/register.jpg";
-import "./Register.css";
+import "./Registerlogin.css";
 
 function Register() {
+  const navigate = useNavigate();
+
   const [student, setStudent] = useState({
     name: "",
     roll: "",
     branch: "",
     email: "",
-    fees: "",
-    paid: ""
+    password: "",
+    confirmPassword: ""
   });
 
   const change = (e) => {
@@ -23,30 +25,46 @@ function Register() {
   const submit = (e) => {
     e.preventDefault();
 
-    const totalFees = Number(student.fees);
-    const paidFees = Number(student.paid);
-    const pendingFees = totalFees - paidFees;
-
-    const studentData = {
-      ...student,
-      pending: pendingFees
-    };
+    if (student.password !== student.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
 
     const oldData = JSON.parse(localStorage.getItem("students")) || [];
+
+    // Check duplicate email
+    const emailExists = oldData.find(
+      (item) => item.email === student.email
+    );
+
+    if (emailExists) {
+      alert("Email already registered. Please login.");
+      return;
+    }
+
+    const studentData = {
+      name: student.name,
+      roll: student.roll,
+      branch: student.branch,
+      email: student.email,
+      password: student.password
+    };
 
     oldData.push(studentData);
 
     localStorage.setItem("students", JSON.stringify(oldData));
 
-    alert("Student Registered Successfully");
+    alert("Registration Successful!");
+
+    navigate("/login");
 
     setStudent({
       name: "",
       roll: "",
       branch: "",
       email: "",
-      fees: "",
-      paid: ""
+      password: "",
+      confirmPassword: ""
     });
   };
 
@@ -55,7 +73,6 @@ function Register() {
 
       {/* Left Side */}
       <div className="register">
-
         <form onSubmit={submit}>
 
           <h1>Student Registration</h1>
@@ -97,19 +114,19 @@ function Register() {
           />
 
           <input
-            type="number"
-            name="fees"
-            placeholder="Total Fees"
-            value={student.fees}
+            type="password"
+            name="password"
+            placeholder="Create Password"
+            value={student.password}
             onChange={change}
             required
           />
 
           <input
-            type="number"
-            name="paid"
-            placeholder="Paid Fees"
-            value={student.paid}
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            value={student.confirmPassword}
             onChange={change}
             required
           />
@@ -117,7 +134,6 @@ function Register() {
           <button type="submit">Register</button>
 
         </form>
-
       </div>
 
       {/* Right Side */}
