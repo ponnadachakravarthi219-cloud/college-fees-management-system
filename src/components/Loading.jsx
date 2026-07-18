@@ -1,19 +1,19 @@
-import "./Loading.css";
+// import "./Loading.css";
 
-function Loading(){
+// function Loading(){
 
-return(
+// return(
 
-<div className="loader">
+// <div className="loader">
 
-<div className="spinner"></div>
+// <div className="spinner"></div>
 
-<p>Loading...🫵</p>
+// <p>Loading...🫵</p>
 
-</div>
+// </div>
 
-);
+// );
 
-}
+// }
 
-export default Loading;
+// export default Loading;

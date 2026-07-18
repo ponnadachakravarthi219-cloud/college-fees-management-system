@@ -1,28 +1,47 @@
-import { NavLink } from "react-router-dom";
-import logo from "../assets/images/logo.jpg";
 import "./Navbar.css";
+import { FaBell, FaUserCircle, FaMoon } from "react-icons/fa";
 
 function Navbar() {
+
+  const toggleTheme = () => {
+    document.body.classList.toggle("dark");
+  };
+
   return (
-    <nav className="navbar">
+    <div className="navbar">
 
-      <div className="logo-section">
-        <img src={logo} alt="College Logo" className="logo" />
-
-        <div className="logo-text">
-          <h2>College Fees Management</h2>
-          <p>Management System</p>
-        </div>
+      <div className="navbar-title">
+        <h2>College Fees Management System</h2>
       </div>
 
-      <ul className="nav-links">
-        <li><NavLink to="/">Home</NavLink></li>
-        <li> <NavLink to="/about">Students</NavLink></li>
-        <li> <NavLink to="/about">Fees</NavLink></li>
-        <li> <NavLink to="/about">Logout</NavLink></li>
-      </ul>
+      <div className="navbar-right">
 
-    </nav>
+        <input
+          className="search-input"
+          type="text"
+          placeholder="Search..."
+        />
+
+        <FaBell className="icon" />
+
+        <button className="theme-btn" onClick={toggleTheme}>
+          <FaMoon />
+        </button>
+
+        <img
+          src="https://i.pravatar.cc/150?img=12"
+          alt="Admin"
+          className="profile-img"
+        />
+
+        <div className="profile-info">
+          <h4>Admin</h4>
+          <p>Administrator</p>
+        </div>
+
+      </div>
+
+    </div>
   );
 }
 

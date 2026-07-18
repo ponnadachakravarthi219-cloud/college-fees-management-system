@@ -1,123 +1,192 @@
 import { useEffect, useState } from "react";
-import loginImage from "../assets/images/student.jpg.png";
 import "./Students.css";
 
 function Students() {
   const [students, setStudents] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+
+  const [form, setForm] = useState({
+    name: "",
+    rollNo: "",
+    branch: "",
+    email: "",
+    mobile: "",
+  });
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("students")) || [];
     setStudents(data);
-    setLoading(false);
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("students", JSON.stringify(students));
+  }, [students]);
 
-  const deleteStudent = (index) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this student?"
-    );
-
-    if (!confirmDelete) return;
-
-    const updatedStudents = [...students];
-    updatedStudents.splice(index, 1);
-
-    setStudents(updatedStudents);
-    localStorage.setItem("students", JSON.stringify(updatedStudents));
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const filtered = students.filter((student) =>
-    student.name.toLowerCase().includes(search.toLowerCase())
+  const addStudent = (e) => {
+    e.preventDefault();
+
+    if (
+      !form.name ||
+      !form.rollNo ||
+      !form.branch ||
+      !form.email ||
+      !form.mobile
+    ) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    setStudents([
+      ...students,
+      {
+        id: Date.now(),
+        ...form,
+      },
+    ]);
+
+    setForm({
+      name: "",
+      rollNo: "",
+      branch: "",
+      email: "",
+      mobile: "",
+    });
+  };
+
+  const deleteStudent = (id) => {
+    const confirmDelete = window.confirm(
+      "Delete this student?"
+    );
+
+    if (confirmDelete) {
+      setStudents(students.filter((s) => s.id !== id));
+    }
+  };
+
+  const filteredStudents = students.filter((student) =>
+    student.name.toLowerCase().includes(search.toLowerCase()) ||
+    student.rollNo.toLowerCase().includes(search.toLowerCase())
   );
 
-  if (loading) {
-    return <h2 className="loading">Loading Students...</h2>;
-  }
-
   return (
-    <div className="students-container">
+    <div className="students-page">
 
-      {/* Left Side */}
-      <div className="students">
+      <h1>Students Management</h1>
 
-        <h1>Students List</h1>
+      <form className="student-form" onSubmit={addStudent}>
 
         <input
           type="text"
-          placeholder="Search Student..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="search-box"
+          name="name"
+          placeholder="Student Name"
+          value={form.name}
+          onChange={handleChange}
         />
 
-        {filtered.length === 0 ? (
-          <h3>No Students Found</h3>
-        ) : (
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Roll No</th>
-                <th>Branch</th>
-                <th>Email</th>
-                <th>Total Fees</th>
-                <th>Paid Fees</th>
-                <th>Pending Fees</th>
-                <th>Action</th>
-              </tr>
-            </thead>
+        <input
+          type="text"
+          name="rollNo"
+          placeholder="Roll Number"
+          value={form.rollNo}
+          onChange={handleChange}
+        />
 
-            <tbody>
-              {filtered.map((student, index) => (
-                <tr key={index}>
-                  <td>{student.name}</td>
-                  <td>{student.roll}</td>
-                  <td>{student.branch}</td>
-                  <td>{student.email}</td>
-                  <td>₹ {student.fees}</td>
-                  <td>₹ {student.paid}</td>
-                  <td
-                    style={{
-                      color: Number(student.pending) > 0 ? "red" : "green",
-                      fontWeight: "bold"
-                    }}
+        <input
+          type="text"
+          name="branch"
+          placeholder="Branch"
+          value={form.branch}
+          onChange={handleChange}
+        />
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={form.email}
+          onChange={handleChange}
+        />
+
+        <input
+          type="text"
+          name="mobile"
+          placeholder="Mobile"
+          value={form.mobile}
+          onChange={handleChange}
+        />
+
+        <button>Add Student</button>
+
+      </form>
+
+      <input
+        className="search-box"
+        type="text"
+        placeholder="Search by Name or Roll No"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Roll No</th>
+            <th>Name</th>
+            <th>Branch</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Action</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          {filteredStudents.length === 0 ? (
+            <tr>
+              <td colSpan="6">No Students Found</td>
+            </tr>
+          ) : (
+            filteredStudents.map((student) => (
+              <tr key={student.id}>
+
+                <td>{student.rollNo}</td>
+
+                <td>{student.name}</td>
+
+                <td>{student.branch}</td>
+
+                <td>{student.email}</td>
+
+                <td>{student.mobile}</td>
+
+                <td>
+                  <button
+                    className="delete-btn"
+                    onClick={() =>
+                      deleteStudent(student.id)
+                    }
                   >
-                    ₹ {student.pending}
-                  </td>
-                  <td>
-                     <button
-                     className="view-btn"
-                     onClick={() => viewStudent(student)}
-                      >
-                      View
-                    </button>
-                    
-                    <button
-                      className="delete-btn"
-                      onClick={() => deleteStudent(index)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+                    Delete
+                  </button>
+                </td>
 
-          </table>
-        )}
+              </tr>
+            ))
+          )}
 
-      </div>
+        </tbody>
 
-      {/* Right Side Image */}
-      <div className="image-section">
-        <img
-          src={loginImage}
-          alt="College"
-          className="student-image"
-        />
-      </div>
+      </table>
 
     </div>
   );

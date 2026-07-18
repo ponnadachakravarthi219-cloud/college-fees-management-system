@@ -1,30 +1,128 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
 .home{
-height:100vh;
-display:flex;
+    min-height:100vh;
+    background:rgb(30, 240, 170);
+    color:white;
+}
+
+.home-navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 60px;
+}
+
+.login-btn{
+    padding:10px 22px;
+    border:none;
+    border-radius:30px;
+    background:white;
+    color:#1565c0;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.hero{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:70px 80px;
+    flex-wrap:wrap;
+}
+
+.hero-left{
+    max-width:550px;
+}
+
+.hero-left h1{
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+.hero-left p{
+    font-size:20px;
+    line-height:1.8;
+    margin-bottom:35px;
+}
+
+.get-btn{
+    padding:15px 40px;
+    border:none;
+    border-radius:30px;
+    background:white;
+    color:#1565c0;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.get-btn:hover{
+    transform:scale(1.05);
+}
+
+.hero-right img{
+    width:420px;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    padding:40px 80px;
+}
+
+.feature-card{
+    background:white;
+    color:#333;
+    padding:25px;
+    border-radius:12px;
+    text-align:center;
+    transition:.3s;
+}
+
+.feature-card:hover{
+    transform:translateY(-10px);
+}
+
+.home-footer{
+    text-align:center;
+    padding:20px;
+    margin-top:40px;
+}
+
+@media(max-width:900px){
+
+.hero{
 flex-direction:column;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#25e8eb,#1e8a85);
-color:rgb(0, 0, 0);
+text-align:center;
 }
 
-.home h1{
-font-size:42px;
-margin-bottom:20px;
+.hero-right img{
+width:280px;
+margin-top:30px;
 }
 
-.home p{
-font-size:22px;
-margin-bottom:30px;
+.features{
+grid-template-columns:1fr;
+padding:30px;
 }
 
-.home button{
-padding:15px 35px;
-font-size:18px;
-border:none;
-border-radius:10px;
-cursor:pointer;
-background:white;
-color:#2563eb;
-font-weight:bold;
+.home-navbar{
+padding:20px;
+}
+
+.hero{
+padding:40px 20px;
+}
+
+.hero-left h1{
+font-size:40px;
+}
+
 }

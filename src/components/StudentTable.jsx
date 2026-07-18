@@ -1,66 +1,93 @@
-// import "./StudentTable.css";
+import "./StudentTable.css";
 
-// function StudentTable({ students, deleteStudent }) {
-//   if (students.length === 0) {
-//     return (
-//       <div className="table-empty">
-//         {/* <h3>No Students Available</h3>
-//         <p>Please register students to display the table.</p> */}
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <div className="table-container">
-//       <h2>Registered Students</h2>
-
-//       <table>
-//         <thead>
-//           <tr>
-//             <th>S.No</th>
-//             <th>Name</th>
-//             <th>Roll No</th>
-//             <th>Course</th>
-//             <th>Fee Amount</th>
-//             <th>Fee Status</th>
-//             <th>Action</th>
-//           </tr>
-//         </thead>
-
-//         <tbody>
-//           {students.map((student, index) => (
-//             <tr key={index}>
-//               <td>{index + 1}</td>
-//               <td>{student.name}</td>
-//               <td>{student.rollNo}</td>
-//               <td>{student.course}</td>
-//               <td>₹{student.amount}</td>
-//               <td>{student.feeStatus}</td>
-
-//               <td>
-//                 <button
-//                   className="delete-btn"
-//                   onClick={() => deleteStudent(index)}
-//                 >
-//                   Delete
-//                 </button>
-//               </td>
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// }
-
-// export default StudentTable;
 function StudentTable() {
-  return (
-    <div>
-      <h1>Student Records</h1>
+  const students = [
+    {
+      id: 1,
+      roll: "22CSE001",
+      name: "Rahul",
+      branch: "CSE",
+      fee: "Paid",
+      attendance: "95%",
+    },
+    {
+      id: 2,
+      roll: "22CSE002",
+      name: "Kiran",
+      branch: "CSE",
+      fee: "Pending",
+      attendance: "90%",
+    },
+    {
+      id: 3,
+      roll: "22CSE003",
+      name: "Priya",
+      branch: "ECE",
+      fee: "Paid",
+      attendance: "96%",
+    },
+    {
+      id: 4,
+      roll: "22CSE004",
+      name: "Suresh",
+      branch: "IT",
+      fee: "Pending",
+      attendance: "87%",
+    },
+    {
+      id: 5,
+      roll: "22CSE005",
+      name: "Anjali",
+      branch: "CSE",
+      fee: "Paid",
+      attendance: "99%",
+    },
+  ];
 
-      {/* Your existing table */}
-    </div>
+  return (
+    <>
+      <h3 style={{ marginBottom: "20px" }}>
+        Recent Students
+      </h3>
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Roll No</th>
+            <th>Name</th>
+            <th>Branch</th>
+            <th>Fee Status</th>
+            <th>Attendance</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          {students.map((student) => (
+
+            <tr key={student.id}>
+
+              <td>{student.roll}</td>
+
+              <td>{student.name}</td>
+
+              <td>{student.branch}</td>
+
+              <td>{student.fee}</td>
+
+              <td>{student.attendance}</td>
+
+            </tr>
+
+          ))}
+
+        </tbody>
+
+      </table>
+    </>
   );
 }
 

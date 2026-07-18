@@ -1,55 +1,37 @@
-.fees-page{
+.attendance-page{
     padding:30px;
     background-color: aquamarine;
 }
 
-.fees-page h1{
+.attendance-page h1{
     color:#1565c0;
-    margin-bottom:20px;
-}
-
-.summary-card{
-    width:280px;
-    background:#1565c0;
-    color:white;
-    padding:20px;
-    border-radius:10px;
     margin-bottom:25px;
-    box-shadow:0 3px 10px rgba(0,0,0,.15);
 }
 
-.summary-card h2{
-    font-size:20px;
-    margin-bottom:10px;
-}
-
-.summary-card h3{
-    font-size:28px;
-}
-
-.fees-form{
+.attendance-form{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
     gap:15px;
-    margin-bottom:20px;
+    margin-bottom:25px;
 }
 
-.fees-form input{
+.attendance-form input,
+.attendance-form select{
     padding:12px;
     border:1px solid #ccc;
     border-radius:6px;
 }
 
-.fees-form button{
+.attendance-form button{
     background:#1565c0;
     color:white;
     border:none;
     border-radius:6px;
-    padding:12px;
     cursor:pointer;
+    padding:12px;
 }
 
-.fees-form button:hover{
+.attendance-form button:hover{
     background:#0d47a1;
 }
 
@@ -76,20 +58,20 @@ table th{
 
 table td{
     padding:12px;
-    border-bottom:1px solid #ddd;
     text-align:center;
+    border-bottom:1px solid #ddd;
 }
 
 table tr:hover{
-    background:#f7f7f7;
+    background:#f5f5f5;
 }
 
-.paid{
+.present{
     color:#2e7d32;
     font-weight:bold;
 }
 
-.pending{
+.absent{
     color:#d32f2f;
     font-weight:bold;
 }
@@ -109,17 +91,13 @@ table tr:hover{
 
 @media(max-width:768px){
 
-.fees-form{
+.attendance-form{
 grid-template-columns:1fr;
 }
 
 table{
 display:block;
 overflow-x:auto;
-}
-
-.summary-card{
-width:100%;
 }
 
 }

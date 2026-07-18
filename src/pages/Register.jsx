@@ -1,132 +1,105 @@
-// export default Register;
 import { useState } from "react";
-import loginImage from "../assets/images/register.jpg";
+import { Link, useNavigate } from "react-router-dom";
 import "./Register.css";
 
 function Register() {
-  const [student, setStudent] = useState({
+
+  const navigate = useNavigate();
+
+  const [form, setForm] = useState({
     name: "",
     roll: "",
-    branch: "",
     email: "",
-    fees: "",
-    paid: ""
+    password: "",
+    confirmPassword: "",
   });
 
-  const change = (e) => {
-    setStudent({
-      ...student,
-      [e.target.name]: e.target.value
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
     });
   };
 
-  const submit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const totalFees = Number(student.fees);
-    const paidFees = Number(student.paid);
-    const pendingFees = totalFees - paidFees;
+    if (
+      !form.name ||
+      !form.roll ||
+      !form.email ||
+      !form.password ||
+      !form.confirmPassword
+    ) {
+      alert("Please fill all fields");
+      return;
+    }
 
-    const studentData = {
-      ...student,
-      pending: pendingFees
-    };
+    if (form.password !== form.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
 
-    const oldData = JSON.parse(localStorage.getItem("students")) || [];
+    alert("Registration Successful");
 
-    oldData.push(studentData);
-
-    localStorage.setItem("students", JSON.stringify(oldData));
-
-    alert("Student Registered Successfully");
-
-    setStudent({
-      name: "",
-      roll: "",
-      branch: "",
-      email: "",
-      fees: "",
-      paid: ""
-    });
+    navigate("/login");
   };
 
   return (
     <div className="register-container">
 
-      {/* Left Side */}
-      <div className="register">
+      <div className="register-card">
 
-        <form onSubmit={submit}>
+        <h1>Create Account</h1>
 
-          <h1>Student Registration</h1>
+        <form onSubmit={handleSubmit}>
 
           <input
             type="text"
             name="name"
-            placeholder="Student Name"
-            value={student.name}
-            onChange={change}
-            required
+            placeholder="Full Name"
+            onChange={handleChange}
           />
 
           <input
             type="text"
             name="roll"
             placeholder="Roll Number"
-            value={student.roll}
-            onChange={change}
-            required
-          />
-
-          <input
-            type="text"
-            name="branch"
-            placeholder="Branch"
-            value={student.branch}
-            onChange={change}
-            required
+            onChange={handleChange}
           />
 
           <input
             type="email"
             name="email"
             placeholder="Email"
-            value={student.email}
-            onChange={change}
-            required
+            onChange={handleChange}
           />
 
           <input
-            type="number"
-            name="fees"
-            placeholder="Total Fees"
-            value={student.fees}
-            onChange={change}
-            required
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={handleChange}
           />
 
           <input
-            type="number"
-            name="paid"
-            placeholder="Paid Fees"
-            value={student.paid}
-            onChange={change}
-            required
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            onChange={handleChange}
           />
 
-          <button type="submit">Register</button>
+          <button type="submit">
+            Register
+          </button>
 
         </form>
 
-      </div>
+        <p>
+          Already have an account?
+          <Link to="/login"> Login</Link>
+        </p>
 
-      {/* Right Side */}
-      <div className="image-section">
-        <img
-          src={loginImage}
-          alt="Student"
-          className="register-image"
-        />
       </div>
 
     </div>

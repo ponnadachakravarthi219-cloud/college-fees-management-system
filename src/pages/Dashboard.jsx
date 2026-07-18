@@ -1,45 +1,54 @@
-import dashboardBg from "../assets/images/dashboard.jpg";
-import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
 import "./Dashboard.css";
+
+import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+
+import DashboardCards from "../components/Cards/DashboardCards";
+import FeeChart from "../components/Charts/FreeChart";
+import AttendanceChart from "../components/Charts/AttendanceCharts";
+import StudentTable from "../components/StudentTable";
 
 function Dashboard() {
   return (
-    <div
-      className="dashboard-container"
-      style={{ backgroundImage: `url(${dashboardBg})` }}
-    >
-      <Navbar />
+    <div className="dashboard-container">
 
-      <div className="dashboard-content">
-        <Sidebar />
+      <Sidebar />
 
-        <div className="main-content">
-          <h1>✨Welcome To Chalapathi Unversity✨</h1>
-          
-          <h2>🎓College Fees Management Dashboard </h2>
+      <div className="dashboard-main">
 
-          <div className="cards">
+        <Navbar />
 
-            <div className="card">
-              <h3>Total Students</h3>
-              <h1>60</h1>
+        <div className="dashboard-content">
+
+          <h2 className="dashboard-title">
+            Dashboard
+          </h2>
+
+          <DashboardCards />
+
+          <div className="chart-section">
+
+            <div className="chart-card">
+              <FeeChart />
             </div>
 
-            <div className="card">
-              <h3>Total Fees</h3>
-              <h1>₹19,50,000</h1>
+            <div className="chart-card">
+              <AttendanceChart />
             </div>
-
-            <div className="card">
-              <h3>Pending Fees</h3>
-              <h1>₹7,20,000</h1>
-            </div>
-           
 
           </div>
+
+          <div className="table-card">
+            <StudentTable />
+          </div>
+
         </div>
+
+        <Footer />
+
       </div>
+
     </div>
   );
 }

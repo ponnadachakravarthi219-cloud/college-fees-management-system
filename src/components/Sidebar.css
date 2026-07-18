@@ -1,25 +1,71 @@
-.sidebar{
-width:220px;
-height:100vh;
-background:#0f172a;
-display:flex;
-flex-direction:column;
-padding:20px;
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+  background: #10c3ba;
+  color: white;
+  position: fixed;
+  left: 0;
+  top: 0;
 }
 
-.sidebar h2{
-color:white;
-margin-bottom:20px;
+.logo {
+  padding: 25px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,.2);
 }
 
-.sidebar a{
-color:white;
-text-decoration:none;
-padding:12px;
-margin-bottom:10px;
-border-radius:8px;
+.logo h2 {
+  color: white;
 }
 
-.sidebar a:hover{
-background:#2563eb;
+.menu {
+  margin-top: 25px;
+}
+
+.menu li {
+  margin: 8px 15px;
+}
+
+.menu li a {
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 14px;
+  border-radius: 8px;
+  transition: .3s;
+}
+
+.menu li a:hover {
+  background: rgba(255,255,255,.15);
+}
+
+.menu .active a {
+  background: white;
+  color: #0d47a1;
+  font-weight: bold;
+}
+.logout-section{
+    position:absolute;
+    bottom:20px;
+    width:100%;
+    padding:0 15px;
+}
+
+.logout-btn{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px;
+    background:#e53935;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.logout-btn:hover{
+    background:#c62828;
 }

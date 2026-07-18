@@ -1,92 +1,65 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
-
 .login-container{
-    display:flex;
-    width:100%;
-    height:100vh;
-}
-
-.left-panel{
-    width:50%;
-    height:100vh;
-    overflow:hidden;
-}
-
-.login-image{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-}
-
-.right-panel{
-    width:50%;
     height:100vh;
     display:flex;
-    flex-direction:column;
     justify-content:center;
     align-items:center;
-    background:#3ddfe4;
+    background:#17dac4;
 }
 
-.right-panel h1{
-    margin-bottom:30px;
-    color:#030509;
+.login-card{
+    width:400px;
+    background:rgb(177, 255, 246);
+    padding:40px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
 }
 
-.right-panel input{
-    width:320px;
-    padding:12px;
-    margin:10px;
+.login-card h1{
+    color:#1565c0;
+    text-align:center;
+}
+
+.login-card h2{
+    margin:20px 0;
+    text-align:center;
+}
+
+.login-card form{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.login-card input{
+    padding:14px;
+    border:1px solid #cccccc;
+    border-radius:8px;
     font-size:16px;
 }
 
-.show-password{
-    display:flex;
-    align-items:center;
-    margin:10px;
-}
-
-.show-password span{
-    margin-left:10px;
-}
-
-.right-panel button{
-    width:320px;
-    padding:12px;
-    background:#2563eb;
-    color:rgba(255, 252, 252, 0.989);
+.login-card button{
+    padding:14px;
+    background:#c09815;
+    color:white;
     border:none;
+    border-radius:8px;
+    font-size:17px;
     cursor:pointer;
-    font-size:18px;
-    border-radius:5px;
-    margin-top:10px;
 }
 
-.right-panel button:hover{
-    background:#1d4ed8;
-}
-.register-link {
-  margin-top: 15px;
-  text-align: center;
+.login-card button:hover{
+    background:#a10d6d;
 }
 
-.register-link span {
-  color: blue;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.register-link span:hover {
-  text-decoration: underline;
-}
-
-.message{
+.login-card p{
     margin-top:20px;
-    color:red;
+    text-align:center;
+}
+
+.login-card a{
+    color:#0e3f78;
+    font-weight:bold;
+}
+.login{
+    background-color: aquamarine;
 }
