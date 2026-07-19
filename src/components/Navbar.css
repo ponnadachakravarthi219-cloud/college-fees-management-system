@@ -1,7 +1,7 @@
 .navbar {
   margin-left: 250px;
   height: 70px;
-  background: white;
+  background: rgb(43, 201, 198);
   display: flex;
   justify-content: space-between;
   align-items: center;

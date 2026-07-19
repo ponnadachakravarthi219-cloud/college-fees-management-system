@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Attendance.css";
 
 function Attendance() {
+  const navigate = useNavigate();
+
   const [attendance, setAttendance] = useState([]);
   const [search, setSearch] = useState("");
 
@@ -12,11 +15,13 @@ function Attendance() {
     date: "",
   });
 
+  // Load attendance from localStorage
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("attendance")) || [];
     setAttendance(data);
   }, []);
 
+  // Save attendance whenever it changes
   useEffect(() => {
     localStorage.setItem("attendance", JSON.stringify(attendance));
   }, [attendance]);
@@ -31,22 +36,17 @@ function Attendance() {
   const addAttendance = (e) => {
     e.preventDefault();
 
-    if (
-      !form.rollNo ||
-      !form.name ||
-      !form.date
-    ) {
+    if (!form.rollNo || !form.name || !form.date) {
       alert("Please fill all fields");
       return;
     }
 
-    setAttendance([
-      ...attendance,
-      {
-        id: Date.now(),
-        ...form,
-      },
-    ]);
+    const newAttendance = {
+      id: Date.now(),
+      ...form,
+    };
+
+    setAttendance((prev) => [...prev, newAttendance]);
 
     setForm({
       rollNo: "",
@@ -72,6 +72,13 @@ function Attendance() {
     <div className="attendance-page">
 
       <h1>Attendance Management</h1>
+
+      <button
+        className="back-btn"
+        onClick={() => navigate("/dashboard")}
+      >
+        ← Back to Dashboard
+      </button>
 
       <form className="attendance-form" onSubmit={addAttendance}>
 
@@ -116,7 +123,7 @@ function Attendance() {
       <input
         className="search-box"
         type="text"
-        placeholder="Search by Name or Roll No"
+        placeholder="Search by Name or Roll Number"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
@@ -124,7 +131,6 @@ function Attendance() {
       <table>
 
         <thead>
-
           <tr>
             <th>Roll No</th>
             <th>Name</th>
@@ -132,20 +138,16 @@ function Attendance() {
             <th>Date</th>
             <th>Action</th>
           </tr>
-
         </thead>
 
         <tbody>
 
           {filteredAttendance.length === 0 ? (
             <tr>
-              <td colSpan="5">
-                No Attendance Records
-              </td>
+              <td colSpan="5">No Attendance Records</td>
             </tr>
           ) : (
             filteredAttendance.map((item) => (
-
               <tr key={item.id}>
 
                 <td>{item.rollNo}</td>
@@ -169,16 +171,13 @@ function Attendance() {
                 <td>
                   <button
                     className="delete-btn"
-                    onClick={() =>
-                      deleteAttendance(item.id)
-                    }
+                    onClick={() => deleteAttendance(item.id)}
                   >
                     Delete
                   </button>
                 </td>
 
               </tr>
-
             ))
           )}
 

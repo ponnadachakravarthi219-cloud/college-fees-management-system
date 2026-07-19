@@ -11,7 +11,7 @@ function Navbar() {
     <div className="navbar">
 
       <div className="navbar-title">
-        <h2>College Fees Management System</h2>
+        <h2>College Fees and Attendance Track</h2>
       </div>
 
       <div className="navbar-right">
@@ -28,16 +28,16 @@ function Navbar() {
           <FaMoon />
         </button>
 
-        <img
+        {/* <img
           src="https://i.pravatar.cc/150?img=12"
           alt="Admin"
           className="profile-img"
-        />
+        /> */}
 
-        <div className="profile-info">
+        {/* <div className="profile-info">
           <h4>Admin</h4>
           <p>Administrator</p>
-        </div>
+        </div> */}
 
       </div>
 

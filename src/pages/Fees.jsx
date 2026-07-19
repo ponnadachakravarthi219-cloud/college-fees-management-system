@@ -1,7 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Fees.css";
 
 function Fees() {
+   const navigate = useNavigate();
+
+
   const [fees, setFees] = useState([]);
   const [search, setSearch] = useState("");
 
@@ -92,6 +96,14 @@ function Fees() {
       <div className="summary-card">
         <h2>Total Collection</h2>
         <h3>₹ {totalCollection.toLocaleString()}</h3>
+      </div>
+      <div>
+        <button
+  className="back-btn"
+  onClick={() => navigate("/dashboard")}
+>
+  ← Back to Dashboard
+</button>
       </div>
 
       <form className="fees-form" onSubmit={addFee}>

@@ -1,9 +1,9 @@
 .footer {
-  margin-left: 250px;
-  background: white;
+  margin-bottom: 250px;
+  background: rgb(188, 34, 193);
   text-align: center;
   padding: 18px;
   margin-top: auto;
   box-shadow: 0 -2px 8px rgba(0,0,0,.08);
-  color: #666;
+  color: #050505;
 }

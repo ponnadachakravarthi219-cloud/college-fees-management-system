@@ -6,8 +6,8 @@
 
 .home{
     min-height:100vh;
-    background:rgb(30, 240, 170);
-    color:white;
+    background:rgb(203, 36, 218);
+    color:rgb(0, 0, 0);
 }
 
 .home-navbar{
@@ -21,7 +21,7 @@
     padding:10px 22px;
     border:none;
     border-radius:30px;
-    background:white;
+    background:rgb(194, 192, 53);
     color:#1565c0;
     font-weight:bold;
     cursor:pointer;
@@ -54,8 +54,8 @@
     padding:15px 40px;
     border:none;
     border-radius:30px;
-    background:white;
-    color:#1565c0;
+    background:rgb(239, 239, 239);
+    color:#21b9be;
     font-size:18px;
     font-weight:bold;
     cursor:pointer;
@@ -78,7 +78,7 @@
 }
 
 .feature-card{
-    background:white;
+    background:rgb(227, 175, 225);
     color:#333;
     padding:25px;
     border-radius:12px;

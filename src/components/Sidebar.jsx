@@ -52,7 +52,7 @@ const handleLogout = () => {
   return (
     <div className="sidebar">
       <div className="logo">
-        <h2>College ERP</h2>
+        <h2>Edu Track</h2>
       </div>
    
       <ul className="menu">

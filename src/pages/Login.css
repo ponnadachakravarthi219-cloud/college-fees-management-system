@@ -15,7 +15,7 @@
 }
 
 .login-card h1{
-    color:#1565c0;
+    color:#c92424;
     text-align:center;
 }
 
@@ -39,7 +39,7 @@
 
 .login-card button{
     padding:14px;
-    background:#c09815;
+    background:#6f4cc1;
     color:white;
     border:none;
     border-radius:8px;
@@ -48,7 +48,7 @@
 }
 
 .login-card button:hover{
-    background:#a10d6d;
+    background:#0da114;
 }
 
 .login-card p{
@@ -57,7 +57,7 @@
 }
 
 .login-card a{
-    color:#0e3f78;
+    color:#7a0869;
     font-weight:bold;
 }
 .login{

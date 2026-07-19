@@ -34,9 +34,9 @@ function Login() {
 
       <div className="login-card">
 
-        <h1>College ERP</h1>
+        <h1>Edu Track</h1>
 
-        <h2>Admin Login</h2>
+        <h2>Login </h2>
 
         <form onSubmit={handleSubmit}>
 

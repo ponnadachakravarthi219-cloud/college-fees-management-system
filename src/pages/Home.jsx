@@ -8,7 +8,7 @@ function Home() {
     <div className="home">
 
       <nav className="home-navbar">
-        <h2>🎓 College ERP</h2>
+        <h2>🎓 Edu Track</h2>
 
         <button
           className="login-btn"
@@ -23,8 +23,7 @@ function Home() {
         <div className="hero-left">
 
           <h1>
-            College Fees
-            <br />
+            College Fees and Attendance
             Management System
           </h1>
 
@@ -61,22 +60,22 @@ function Home() {
       <section className="features">
 
         <div className="feature-card">
-          <h3>👨‍🎓 Students</h3>
+          <h3> Students</h3>
           <p>Manage all students easily.</p>
         </div>
 
         <div className="feature-card">
-          <h3>📅 Attendance</h3>
+          <h3> Attendance</h3>
           <p>Track attendance instantly.</p>
         </div>
 
         <div className="feature-card">
-          <h3>💰 Fees</h3>
+          <h3> Fees</h3>
           <p>Manage fee collection efficiently.</p>
         </div>
 
         <div className="feature-card">
-          <h3>📊 Reports</h3>
+          <h3>Reports</h3>
           <p>Generate analytics and reports.</p>
         </div>
 
