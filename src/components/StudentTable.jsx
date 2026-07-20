@@ -66,9 +66,9 @@ function StudentTable() {
 
         <tbody>
 
-          {students.map((student) => (
+          {students.map((student,_id) => (
 
-            <tr key={student.id}>
+            <tr key={student.id+1}>
 
               <td>{student.roll}</td>
 

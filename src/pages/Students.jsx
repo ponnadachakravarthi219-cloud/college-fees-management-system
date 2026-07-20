@@ -1,10 +1,30 @@
 import { useEffect, useState } from "react";
 import "./Students.css";
 
+
 function Students() {
   const [students, setStudents] = useState([]);
   const [search, setSearch] = useState("");
+  // const [loading, setLoading] = useState(true);
 
+  // async function fetchStudents(){
+  //   try{
+  //     const response = await api.get(
+  //       "/students");
+      
+  //     setStudents(response.data.students)
+  //     console.log(students)
+  //   }
+  //   catch(error){
+  //     console.log(error);
+  //   }
+  //   finally{
+  //     setLoading(false);
+  //   }
+  // };
+  // useEffect(()=>{
+  //   fetchStudents();
+  // },[]);
   const [form, setForm] = useState({
     name: "",
     rollNo: "",

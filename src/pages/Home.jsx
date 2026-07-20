@@ -10,13 +10,13 @@ function Home() {
       <nav className="home-navbar">
         <h2>🎓 Edu Track</h2>
 
-        <button
+         {/* <button
           className="login-btn"
           onClick={() => navigate("/login")}
-        >
+        > 
           Login
-        </button>
-      </nav>
+        </button> */}
+       </nav>
 
       <div className="hero">
 
