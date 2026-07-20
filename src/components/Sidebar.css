@@ -41,8 +41,8 @@
 }
 
 .menu .active a {
-  background: white;
-  color: #0d47a1;
+  background: rgb(238, 240, 240);
+  color: #1c23e2;
   font-weight: bold;
 }
 .logout-section{
@@ -67,5 +67,5 @@
 }
 
 .logout-btn:hover{
-    background:#c62828;
+    background:#d14848;
 }
