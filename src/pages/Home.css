@@ -1,128 +1,208 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.home{
-    min-height:100vh;
-    background:rgb(203, 36, 218);
-    color:rgb(0, 0, 0);
+.home {
+  min-height: 100vh;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  color: rgb(246, 246, 248);
+
+  position: relative;
+  overflow: hidden;
 }
 
-.home-navbar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 60px;
+/* Dark overlay */
+.home::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.45);
+
+  z-index: 0;
 }
 
-.login-btn{
-    padding:10px 22px;
-    border:none;
-    border-radius:30px;
-    background:rgb(194, 192, 53);
-    color:#1565c0;
-    font-weight:bold;
-    cursor:pointer;
+/* Keep all content above overlay */
+.home > * {
+  position: relative;
+  z-index: 1;
 }
 
-.hero{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:70px 80px;
-    flex-wrap:wrap;
+/* Navbar */
+
+.home-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 20px 60px;
 }
 
-.hero-left{
-    max-width:550px;
+.home-navbar h2 {
+  font-size: 50px;
+  color: rgb(233, 180, 6);
 }
 
-.hero-left h1{
-    font-size:55px;
-    margin-bottom:20px;
+/* Hero */
+
+.hero {
+  min-height: 550px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 70px 80px;
+
+  gap: 50px;
 }
 
-.hero-left p{
-    font-size:20px;
-    line-height:1.8;
-    margin-bottom:35px;
+.hero-left {
+  max-width: 650px;
 }
 
-.get-btn{
-    padding:15px 40px;
-    border:none;
-    border-radius:30px;
-    background:rgb(239, 239, 239);
-    color:#21b9be;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.3s;
+.hero-left h1 {
+  font-size: 55px;
+  line-height: 1.2;
+
+  margin-bottom: 20px;
 }
 
-.get-btn:hover{
-    transform:scale(1.05);
+.hero-left p {
+  font-size: 20px;
+  line-height: 1.8;
+
+  margin-bottom: 35px;
 }
 
-.hero-right img{
-    width:420px;
+/* Get Started Button */
+
+.get-btn {
+  padding: 15px 40px;
+
+  border: none;
+  border-radius: 30px;
+
+  background: white;
+  color: #c01515;
+
+  font-size: 18px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.3s;
 }
 
-.features{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
-    padding:40px 80px;
+.get-btn:hover {
+  transform: scale(1.05);
+  background: #78e7e1;
 }
 
-.feature-card{
-    background:rgb(227, 175, 225);
-    color:#333;
-    padding:25px;
-    border-radius:12px;
-    text-align:center;
-    transition:.3s;
+/* Right Image */
+
+.hero-right img {
+  width: 200px;
+  max-width: 100%;
+
+  filter: drop-shadow(
+    0 10px 20px rgba(0, 0, 0, 0.3)
+  );
 }
 
-.feature-card:hover{
-    transform:translateY(-10px);
+/* Features */
+
+.features {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 20px;
+
+  /* padding: 40px 80px; */
 }
 
-.home-footer{
-    text-align:center;
-    padding:20px;
-    margin-top:40px;
+.feature-card {
+  background: rgba(169, 244, 239, 0.9);
+
+  color: #333;
+
+  padding: 25px;
+
+  border-radius: 15px;
+
+  text-align: center;
+
+  transition: 0.3s;
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-@media(max-width:900px){
-
-.hero{
-flex-direction:column;
-text-align:center;
+.feature-card:hover {
+  transform: translateY(-10px);
 }
 
-.hero-right img{
-width:280px;
-margin-top:30px;
+.feature-card h3 {
+  margin-bottom: 10px;
+  color: #1565c0;
 }
 
-.features{
-grid-template-columns:1fr;
-padding:30px;
+.feature-card p {
+  color: #555;
 }
 
-.home-navbar{
-padding:20px;
+/* Footer */
+
+.home-footer {
+  text-align: center;
+
+  padding: 25px;
+
+  margin-top: 20px;
+
+  background: rgba(0, 0, 0, 0.3);
 }
 
-.hero{
-padding:40px 20px;
-}
+/* Responsive */
 
-.hero-left h1{
-font-size:40px;
-}
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
 
+    text-align: center;
+
+    padding: 50px 20px;
+  }
+
+  .hero-right img {
+    width: 280px;
+
+    margin-top: 30px;
+  }
+
+  .features {
+    grid-template-columns: 1fr;
+
+    padding: 30px;
+  }
+
+  .home-navbar {
+    padding: 20px;
+  }
+
+  .hero-left h1 {
+    font-size: 40px;
+  }
+
+  .hero-left p {
+    font-size: 17px;
+  }
 }
