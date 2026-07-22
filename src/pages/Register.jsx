@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import api from "../services/api";
 import "./Register.css";
 
 function Register() {
-
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -21,7 +21,7 @@ function Register() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (
@@ -40,24 +40,33 @@ function Register() {
       return;
     }
 
-    alert("Registration Successful");
+    try {
+      await api.post("/auth/register", {
+        name: form.name,
+        rollNo: form.roll,
+        email: form.email,
+        password: form.password,
+        role: "student",
+      });
 
-    navigate("/login");
+      alert("Registration Successful");
+      navigate("/login");
+    } catch (err) {
+      alert(err.response?.data?.message || "Registration Failed");
+    }
   };
 
   return (
     <div className="register-container">
-
       <div className="register-card">
-
         <h1>Create Account</h1>
 
         <form onSubmit={handleSubmit}>
-
           <input
             type="text"
             name="name"
             placeholder="Full Name"
+            value={form.name}
             onChange={handleChange}
           />
 
@@ -65,6 +74,7 @@ function Register() {
             type="text"
             name="roll"
             placeholder="Roll Number"
+            value={form.roll}
             onChange={handleChange}
           />
 
@@ -72,6 +82,7 @@ function Register() {
             type="email"
             name="email"
             placeholder="Email"
+            value={form.email}
             onChange={handleChange}
           />
 
@@ -79,6 +90,7 @@ function Register() {
             type="password"
             name="password"
             placeholder="Password"
+            value={form.password}
             onChange={handleChange}
           />
 
@@ -86,22 +98,18 @@ function Register() {
             type="password"
             name="confirmPassword"
             placeholder="Confirm Password"
+            value={form.confirmPassword}
             onChange={handleChange}
           />
 
-          <button type="submit">
-            Register
-          </button>
-
+          <button type="submit">Register</button>
         </form>
 
         <p>
           Already have an account?
           <Link to="/login"> Login</Link>
         </p>
-
       </div>
-
     </div>
   );
 }

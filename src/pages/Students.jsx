@@ -1,30 +1,11 @@
 import { useEffect, useState } from "react";
 import "./Students.css";
-
+import api from "../services/api";
 
 function Students() {
   const [students, setStudents] = useState([]);
   const [search, setSearch] = useState("");
-  // const [loading, setLoading] = useState(true);
 
-  // async function fetchStudents(){
-  //   try{
-  //     const response = await api.get(
-  //       "/students");
-      
-  //     setStudents(response.data.students)
-  //     console.log(students)
-  //   }
-  //   catch(error){
-  //     console.log(error);
-  //   }
-  //   finally{
-  //     setLoading(false);
-  //   }
-  // };
-  // useEffect(()=>{
-  //   fetchStudents();
-  // },[]);
   const [form, setForm] = useState({
     name: "",
     rollNo: "",
@@ -34,13 +15,18 @@ function Students() {
   });
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("students")) || [];
-    setStudents(data);
+    fetchStudents();
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("students", JSON.stringify(students));
-  }, [students]);
+  const fetchStudents = async () => {
+    try {
+      const res = await api.get("/students");
+      setStudents(res.data);
+    } catch (err) {
+      console.log(err);
+      alert("Failed to fetch students");
+    }
+  };
 
   const handleChange = (e) => {
     setForm({
@@ -49,7 +35,7 @@ function Students() {
     });
   };
 
-  const addStudent = (e) => {
+  const addStudent = async (e) => {
     e.preventDefault();
 
     if (
@@ -63,45 +49,52 @@ function Students() {
       return;
     }
 
-    setStudents([
-      ...students,
-      {
-        id: Date.now(),
-        ...form,
-      },
-    ]);
+    try {
+      await api.post("/students", form);
 
-    setForm({
-      name: "",
-      rollNo: "",
-      branch: "",
-      email: "",
-      mobile: "",
-    });
-  };
+      alert("Student Added Successfully");
 
-  const deleteStudent = (id) => {
-    const confirmDelete = window.confirm(
-      "Delete this student?"
-    );
+      fetchStudents();
 
-    if (confirmDelete) {
-      setStudents(students.filter((s) => s.id !== id));
+      setForm({
+        name: "",
+        rollNo: "",
+        branch: "",
+        email: "",
+        mobile: "",
+      });
+    } catch (err) {
+      console.log(err);
+      alert("Failed to add student");
     }
   };
 
-  const filteredStudents = students.filter((student) =>
-    student.name.toLowerCase().includes(search.toLowerCase()) ||
-    student.rollNo.toLowerCase().includes(search.toLowerCase())
+  const deleteStudent = async (id) => {
+    const confirmDelete = window.confirm("Delete this student?");
+
+    if (!confirmDelete) return;
+
+    try {
+      await api.delete(`/students/${id}`);
+      alert("Student Deleted");
+      fetchStudents();
+    } catch (err) {
+      console.log(err);
+      alert("Failed to delete student");
+    }
+  };
+
+  const filteredStudents = students.filter(
+    (student) =>
+      student.name.toLowerCase().includes(search.toLowerCase()) ||
+      student.rollNo.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <div className="students-page">
-
       <h1>Students Management</h1>
 
       <form className="student-form" onSubmit={addStudent}>
-
         <input
           type="text"
           name="name"
@@ -142,22 +135,19 @@ function Students() {
           onChange={handleChange}
         />
 
-        <button>Add Student</button>
-
+        <button type="submit">Add Student</button>
       </form>
 
       <input
         className="search-box"
         type="text"
-        placeholder="Search by Name or Roll No"
+        placeholder="Search by Name or Roll Number"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
 
       <table>
-
         <thead>
-
           <tr>
             <th>Roll No</th>
             <th>Name</th>
@@ -166,48 +156,35 @@ function Students() {
             <th>Mobile</th>
             <th>Action</th>
           </tr>
-
         </thead>
 
         <tbody>
-
           {filteredStudents.length === 0 ? (
             <tr>
               <td colSpan="6">No Students Found</td>
             </tr>
           ) : (
             filteredStudents.map((student) => (
-              <tr key={student.id}>
-
+              <tr key={student._id}>
                 <td>{student.rollNo}</td>
-
                 <td>{student.name}</td>
-
                 <td>{student.branch}</td>
-
                 <td>{student.email}</td>
-
                 <td>{student.mobile}</td>
 
                 <td>
                   <button
                     className="delete-btn"
-                    onClick={() =>
-                      deleteStudent(student.id)
-                    }
+                    onClick={() => deleteStudent(student._id)}
                   >
                     Delete
                   </button>
                 </td>
-
               </tr>
             ))
           )}
-
         </tbody>
-
       </table>
-
     </div>
   );
 }

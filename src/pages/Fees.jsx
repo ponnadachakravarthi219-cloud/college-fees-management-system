@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../services/api";
 import "./Fees.css";
 
 function Fees() {
-   const navigate = useNavigate();
-
+  const navigate = useNavigate();
 
   const [fees, setFees] = useState([]);
   const [search, setSearch] = useState("");
@@ -18,13 +18,18 @@ function Fees() {
   });
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("fees")) || [];
-    setFees(data);
+    fetchFees();
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("fees", JSON.stringify(fees));
-  }, [fees]);
+  const fetchFees = async () => {
+    try {
+      const res = await api.get("/fees");
+      setFees(res.data);
+    } catch (err) {
+      console.log(err);
+      alert("Failed to fetch fee records");
+    }
+  };
 
   const handleChange = (e) => {
     setForm({
@@ -33,7 +38,7 @@ function Fees() {
     });
   };
 
-  const addFee = (e) => {
+  const addFee = async (e) => {
     e.preventDefault();
 
     if (
@@ -47,34 +52,36 @@ function Fees() {
       return;
     }
 
-    const total = Number(form.totalFee);
-    const paid = Number(form.paidFee);
+    try {
+      await api.post("/fees", form);
 
-    setFees([
-      ...fees,
-      {
-        id: Date.now(),
-        rollNo: form.rollNo,
-        name: form.name,
-        totalFee: total,
-        paidFee: paid,
-        pendingFee: total - paid,
-        paymentDate: form.paymentDate,
-      },
-    ]);
+      alert("Fee Saved Successfully");
 
-    setForm({
-      rollNo: "",
-      name: "",
-      totalFee: "",
-      paidFee: "",
-      paymentDate: "",
-    });
+      fetchFees();
+
+      setForm({
+        rollNo: "",
+        name: "",
+        totalFee: "",
+        paidFee: "",
+        paymentDate: "",
+      });
+    } catch (err) {
+      console.log(err);
+      alert("Failed to save fee");
+    }
   };
 
-  const deleteFee = (id) => {
-    if (window.confirm("Delete this fee record?")) {
-      setFees(fees.filter((item) => item.id !== id));
+  const deleteFee = async (id) => {
+    if (!window.confirm("Delete this fee record?")) return;
+
+    try {
+      await api.delete(`/fees/${id}`);
+      alert("Fee Deleted");
+      fetchFees();
+    } catch (err) {
+      console.log(err);
+      alert("Failed to delete fee");
     }
   };
 
@@ -85,7 +92,7 @@ function Fees() {
   );
 
   const totalCollection = useMemo(() => {
-    return fees.reduce((sum, item) => sum + item.paidFee, 0);
+    return fees.reduce((sum, item) => sum + Number(item.paidFee), 0);
   }, [fees]);
 
   return (
@@ -97,14 +104,13 @@ function Fees() {
         <h2>Total Collection</h2>
         <h3>₹ {totalCollection.toLocaleString()}</h3>
       </div>
-      <div>
-        <button
-  className="back-btn"
-  onClick={() => navigate("/dashboard")}
->
-  ← Back to Dashboard
-</button>
-      </div>
+
+      <button
+        className="back-btn"
+        onClick={() => navigate("/dashboard")}
+      >
+        ← Back to Dashboard
+      </button>
 
       <form className="fees-form" onSubmit={addFee}>
 
@@ -164,7 +170,6 @@ function Fees() {
       <table>
 
         <thead>
-
           <tr>
             <th>Roll No</th>
             <th>Name</th>
@@ -175,21 +180,17 @@ function Fees() {
             <th>Date</th>
             <th>Action</th>
           </tr>
-
         </thead>
 
         <tbody>
 
           {filteredFees.length === 0 ? (
             <tr>
-              <td colSpan="8">
-                No Fee Records Found
-              </td>
+              <td colSpan="8">No Fee Records Found</td>
             </tr>
           ) : (
             filteredFees.map((item) => (
-
-              <tr key={item.id}>
+              <tr key={item._id}>
 
                 <td>{item.rollNo}</td>
 
@@ -209,9 +210,7 @@ function Fees() {
                         : "pending"
                     }
                   >
-                    {item.pendingFee === 0
-                      ? "Paid"
-                      : "Pending"}
+                    {item.pendingFee === 0 ? "Paid" : "Pending"}
                   </span>
                 </td>
 
@@ -220,14 +219,13 @@ function Fees() {
                 <td>
                   <button
                     className="delete-btn"
-                    onClick={() => deleteFee(item.id)}
+                    onClick={() => deleteFee(item._id)}
                   >
                     Delete
                   </button>
                 </td>
 
               </tr>
-
             ))
           )}
 

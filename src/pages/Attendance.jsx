@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../services/api";
 import "./Attendance.css";
 
 function Attendance() {
@@ -15,16 +16,19 @@ function Attendance() {
     date: "",
   });
 
-  // Load attendance from localStorage
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("attendance")) || [];
-    setAttendance(data);
+    fetchAttendance();
   }, []);
 
-  // Save attendance whenever it changes
-  useEffect(() => {
-    localStorage.setItem("attendance", JSON.stringify(attendance));
-  }, [attendance]);
+  const fetchAttendance = async () => {
+    try {
+      const res = await api.get("/attendance");
+      setAttendance(res.data);
+    } catch (err) {
+      console.log(err);
+      alert("Failed to fetch attendance");
+    }
+  };
 
   const handleChange = (e) => {
     setForm({
@@ -33,7 +37,7 @@ function Attendance() {
     });
   };
 
-  const addAttendance = (e) => {
+  const addAttendance = async (e) => {
     e.preventDefault();
 
     if (!form.rollNo || !form.name || !form.date) {
@@ -41,24 +45,35 @@ function Attendance() {
       return;
     }
 
-    const newAttendance = {
-      id: Date.now(),
-      ...form,
-    };
+    try {
+      await api.post("/attendance", form);
 
-    setAttendance((prev) => [...prev, newAttendance]);
+      alert("Attendance Saved Successfully");
 
-    setForm({
-      rollNo: "",
-      name: "",
-      status: "Present",
-      date: "",
-    });
+      fetchAttendance();
+
+      setForm({
+        rollNo: "",
+        name: "",
+        status: "Present",
+        date: "",
+      });
+    } catch (err) {
+      console.log(err);
+      alert("Failed to save attendance");
+    }
   };
 
-  const deleteAttendance = (id) => {
-    if (window.confirm("Delete attendance record?")) {
-      setAttendance(attendance.filter((item) => item.id !== id));
+  const deleteAttendance = async (id) => {
+    if (!window.confirm("Delete attendance record?")) return;
+
+    try {
+      await api.delete(`/attendance/${id}`);
+      alert("Attendance Deleted");
+      fetchAttendance();
+    } catch (err) {
+      console.log(err);
+      alert("Failed to delete attendance");
     }
   };
 
@@ -103,8 +118,8 @@ function Attendance() {
           value={form.status}
           onChange={handleChange}
         >
-          <option>Present</option>
-          <option>Absent</option>
+          <option value="Present">Present</option>
+          <option value="Absent">Absent</option>
         </select>
 
         <input
@@ -148,7 +163,7 @@ function Attendance() {
             </tr>
           ) : (
             filteredAttendance.map((item) => (
-              <tr key={item.id}>
+              <tr key={item._id}>
 
                 <td>{item.rollNo}</td>
 
@@ -171,7 +186,7 @@ function Attendance() {
                 <td>
                   <button
                     className="delete-btn"
-                    onClick={() => deleteAttendance(item.id)}
+                    onClick={() => deleteAttendance(item._id)}
                   >
                     Delete
                   </button>
