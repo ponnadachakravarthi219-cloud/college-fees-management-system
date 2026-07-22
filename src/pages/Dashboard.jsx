@@ -10,6 +10,7 @@ import AttendanceChart from "../components/Charts/AttendanceCharts";
 import StudentTable from "../components/StudentTable";
 
 function Dashboard() {
+
   return (
     <div className="dashboard-container">
 

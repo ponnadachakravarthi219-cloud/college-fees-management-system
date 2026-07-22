@@ -70,9 +70,7 @@ function Students() {
   };
 
   const deleteStudent = async (id) => {
-    const confirmDelete = window.confirm("Delete this student?");
-
-    if (!confirmDelete) return;
+    if (!window.confirm("Delete this student?")) return;
 
     try {
       await api.delete(`/students/${id}`);
@@ -92,9 +90,11 @@ function Students() {
 
   return (
     <div className="students-page">
+
       <h1>Students Management</h1>
 
       <form className="student-form" onSubmit={addStudent}>
+
         <input
           type="text"
           name="name"
@@ -136,6 +136,7 @@ function Students() {
         />
 
         <button type="submit">Add Student</button>
+
       </form>
 
       <input
@@ -159,6 +160,7 @@ function Students() {
         </thead>
 
         <tbody>
+
           {filteredStudents.length === 0 ? (
             <tr>
               <td colSpan="6">No Students Found</td>
@@ -171,7 +173,6 @@ function Students() {
                 <td>{student.branch}</td>
                 <td>{student.email}</td>
                 <td>{student.mobile}</td>
-
                 <td>
                   <button
                     className="delete-btn"
@@ -183,8 +184,10 @@ function Students() {
               </tr>
             ))
           )}
+
         </tbody>
       </table>
+
     </div>
   );
 }

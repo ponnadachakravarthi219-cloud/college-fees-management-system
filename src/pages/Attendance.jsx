@@ -82,7 +82,7 @@ function Attendance() {
       item.name.toLowerCase().includes(search.toLowerCase()) ||
       item.rollNo.toLowerCase().includes(search.toLowerCase())
   );
-
+const role=localStorage.getItem("role");
   return (
     <div className="attendance-page">
 
