@@ -57,3 +57,31 @@
     color:#1565c0;
     font-weight:bold;
 }
+
+.password-box {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.password-box input {
+  width: 100%;
+  padding: 12px;
+  padding-right: 70px;
+  box-sizing: border-box;
+}
+
+.show-btn {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: #007bff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.show-btn:hover {
+  color: #0056b3;
+}

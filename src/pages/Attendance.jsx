@@ -6,6 +6,9 @@ import "./Attendance.css";
 function Attendance() {
   const navigate = useNavigate();
 
+  const role = localStorage.getItem("role");
+  const myRollNo = localStorage.getItem("rollNo");
+
   const [attendance, setAttendance] = useState([]);
   const [search, setSearch] = useState("");
 
@@ -77,12 +80,17 @@ function Attendance() {
     }
   };
 
-  const filteredAttendance = attendance.filter(
-    (item) =>
+  const filteredAttendance = attendance.filter((item) => {
+    if (role === "student") {
+      return item.rollNo === myRollNo;
+    }
+
+    return (
       item.name.toLowerCase().includes(search.toLowerCase()) ||
       item.rollNo.toLowerCase().includes(search.toLowerCase())
-  );
-const role=localStorage.getItem("role");
+    );
+  });
+
   return (
     <div className="attendance-page">
 
@@ -95,53 +103,57 @@ const role=localStorage.getItem("role");
         ← Back to Dashboard
       </button>
 
-      <form className="attendance-form" onSubmit={addAttendance}>
+      {role === "admin" && (
+        <form className="attendance-form" onSubmit={addAttendance}>
 
+          <input
+            type="text"
+            name="rollNo"
+            placeholder="Roll Number"
+            value={form.rollNo}
+            onChange={handleChange}
+          />
+
+          <input
+            type="text"
+            name="name"
+            placeholder="Student Name"
+            value={form.name}
+            onChange={handleChange}
+          />
+
+          <select
+            name="status"
+            value={form.status}
+            onChange={handleChange}
+          >
+            <option value="Present">Present</option>
+            <option value="Absent">Absent</option>
+          </select>
+
+          <input
+            type="date"
+            name="date"
+            value={form.date}
+            onChange={handleChange}
+          />
+
+          <button type="submit">
+            Save Attendance
+          </button>
+
+        </form>
+      )}
+
+      {role === "admin" && (
         <input
+          className="search-box"
           type="text"
-          name="rollNo"
-          placeholder="Roll Number"
-          value={form.rollNo}
-          onChange={handleChange}
+          placeholder="Search by Name or Roll Number"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
-
-        <input
-          type="text"
-          name="name"
-          placeholder="Student Name"
-          value={form.name}
-          onChange={handleChange}
-        />
-
-        <select
-          name="status"
-          value={form.status}
-          onChange={handleChange}
-        >
-          <option value="Present">Present</option>
-          <option value="Absent">Absent</option>
-        </select>
-
-        <input
-          type="date"
-          name="date"
-          value={form.date}
-          onChange={handleChange}
-        />
-
-        <button type="submit">
-          Save Attendance
-        </button>
-
-      </form>
-
-      <input
-        className="search-box"
-        type="text"
-        placeholder="Search by Name or Roll Number"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      )}
 
       <table>
 
@@ -151,7 +163,7 @@ const role=localStorage.getItem("role");
             <th>Name</th>
             <th>Status</th>
             <th>Date</th>
-            <th>Action</th>
+            {role === "admin" && <th>Action</th>}
           </tr>
         </thead>
 
@@ -159,7 +171,9 @@ const role=localStorage.getItem("role");
 
           {filteredAttendance.length === 0 ? (
             <tr>
-              <td colSpan="5">No Attendance Records</td>
+              <td colSpan={role === "admin" ? "5" : "4"}>
+                No Attendance Records
+              </td>
             </tr>
           ) : (
             filteredAttendance.map((item) => (
@@ -183,14 +197,16 @@ const role=localStorage.getItem("role");
 
                 <td>{item.date}</td>
 
-                <td>
-                  <button
-                    className="delete-btn"
-                    onClick={() => deleteAttendance(item._id)}
-                  >
-                    Delete
-                  </button>
-                </td>
+                {role === "admin" && (
+                  <td>
+                    <button
+                      className="delete-btn"
+                      onClick={() => deleteAttendance(item._id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                )}
 
               </tr>
             ))

@@ -6,6 +6,9 @@ import "./Fees.css";
 function Fees() {
   const navigate = useNavigate();
 
+  const role = localStorage.getItem("role");
+  const myRollNo = localStorage.getItem("rollNo");
+
   const [fees, setFees] = useState([]);
   const [search, setSearch] = useState("");
 
@@ -85,11 +88,16 @@ function Fees() {
     }
   };
 
-  const filteredFees = fees.filter(
-    (item) =>
+  const filteredFees = fees.filter((item) => {
+    if (role === "student") {
+      return item.rollNo === myRollNo;
+    }
+
+    return (
       item.name.toLowerCase().includes(search.toLowerCase()) ||
       item.rollNo.toLowerCase().includes(search.toLowerCase())
-  );
+    );
+  });
 
   const totalCollection = useMemo(() => {
     return fees.reduce((sum, item) => sum + Number(item.paidFee), 0);
@@ -112,60 +120,64 @@ function Fees() {
         ← Back to Dashboard
       </button>
 
-      <form className="fees-form" onSubmit={addFee}>
+      {role === "admin" && (
+        <form className="fees-form" onSubmit={addFee}>
 
+          <input
+            type="text"
+            name="rollNo"
+            placeholder="Roll Number"
+            value={form.rollNo}
+            onChange={handleChange}
+          />
+
+          <input
+            type="text"
+            name="name"
+            placeholder="Student Name"
+            value={form.name}
+            onChange={handleChange}
+          />
+
+          <input
+            type="number"
+            name="totalFee"
+            placeholder="Total Fee"
+            value={form.totalFee}
+            onChange={handleChange}
+          />
+
+          <input
+            type="number"
+            name="paidFee"
+            placeholder="Paid Amount"
+            value={form.paidFee}
+            onChange={handleChange}
+          />
+
+          <input
+            type="date"
+            name="paymentDate"
+            value={form.paymentDate}
+            onChange={handleChange}
+          />
+
+          <button type="submit">
+            Save Fee
+          </button>
+
+        </form>
+      )}
+
+      {role === "admin" && (
         <input
+          className="search-box"
           type="text"
-          name="rollNo"
-          placeholder="Roll Number"
-          value={form.rollNo}
-          onChange={handleChange}
+          placeholder="Search by Name or Roll Number"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
-
-        <input
-          type="text"
-          name="name"
-          placeholder="Student Name"
-          value={form.name}
-          onChange={handleChange}
-        />
-
-        <input
-          type="number"
-          name="totalFee"
-          placeholder="Total Fee"
-          value={form.totalFee}
-          onChange={handleChange}
-        />
-
-        <input
-          type="number"
-          name="paidFee"
-          placeholder="Paid Amount"
-          value={form.paidFee}
-          onChange={handleChange}
-        />
-
-        <input
-          type="date"
-          name="paymentDate"
-          value={form.paymentDate}
-          onChange={handleChange}
-        />
-
-        <button type="submit">
-          Save Fee
-        </button>
-
-      </form>
-
-      <input
-        className="search-box"
-        type="text"
-        placeholder="Search by Name or Roll Number"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      )}
 
       <table>
 
@@ -178,7 +190,7 @@ function Fees() {
             <th>Pending</th>
             <th>Status</th>
             <th>Date</th>
-            <th>Action</th>
+            {role === "admin" && <th>Action</th>}
           </tr>
         </thead>
 
@@ -186,20 +198,18 @@ function Fees() {
 
           {filteredFees.length === 0 ? (
             <tr>
-              <td colSpan="8">No Fee Records Found</td>
+              <td colSpan={role === "admin" ? "8" : "7"}>
+                No Fee Records Found
+              </td>
             </tr>
           ) : (
             filteredFees.map((item) => (
               <tr key={item._id}>
 
                 <td>{item.rollNo}</td>
-
                 <td>{item.name}</td>
-
                 <td>₹ {item.totalFee}</td>
-
                 <td>₹ {item.paidFee}</td>
-
                 <td>₹ {item.pendingFee}</td>
 
                 <td>
@@ -216,14 +226,16 @@ function Fees() {
 
                 <td>{item.paymentDate}</td>
 
-                <td>
-                  <button
-                    className="delete-btn"
-                    onClick={() => deleteFee(item._id)}
-                  >
-                    Delete
-                  </button>
-                </td>
+                {role === "admin" && (
+                  <td>
+                    <button
+                      className="delete-btn"
+                      onClick={() => deleteFee(item._id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                )}
 
               </tr>
             ))

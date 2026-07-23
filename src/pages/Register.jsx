@@ -6,6 +6,8 @@ import "./Register.css";
 function Register() {
   const navigate = useNavigate();
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const [form, setForm] = useState({
     name: "",
     roll: "",
@@ -46,7 +48,7 @@ function Register() {
         rollNo: form.roll,
         email: form.email,
         password: form.password,
-        role: "student",
+        role: "admin",
       });
 
       alert("Registration Successful");
@@ -65,7 +67,7 @@ function Register() {
           <input
             type="text"
             name="name"
-            placeholder="Full Name"
+            placeholder="Enter Full Name"
             value={form.name}
             onChange={handleChange}
           />
@@ -73,7 +75,7 @@ function Register() {
           <input
             type="text"
             name="roll"
-            placeholder="Roll Number"
+            placeholder="Enter RollNumber"
             value={form.roll}
             onChange={handleChange}
           />
@@ -81,26 +83,46 @@ function Register() {
           <input
             type="email"
             name="email"
-            placeholder="Email"
+            placeholder="Enter Email"
             value={form.email}
             onChange={handleChange}
           />
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={form.password}
-            onChange={handleChange}
-          />
+          {/* Password */}
+          <div className="password-box">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="Enter Password"
+              value={form.password}
+              onChange={handleChange}
+            />
+            <button
+              type="button"
+              className="show-btn"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
+          </div>
 
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            value={form.confirmPassword}
-            onChange={handleChange}
-          />
+          {/* Confirm Password */}
+          <div className="password-box">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="confirmPassword"
+              placeholder="Re-enter Password"
+              value={form.confirmPassword}
+              onChange={handleChange}
+            />
+            <button
+              type="button"
+              className="show-btn"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
+          </div>
 
           <button type="submit">Register</button>
         </form>
@@ -109,6 +131,14 @@ function Register() {
           Already have an account?
           <Link to="/login"> Login</Link>
         </p>
+
+        
+
+        {/* <h4>Example Data</h4>
+        <p><b>Name:</b> Chakravarthi</p>
+        <p><b>Roll No:</b> 22A91A05F1</p>
+        <p><b>Email:</b> student@gmail.com</p>
+        <p><b>Password:</b> Student@123</p> */}
       </div>
     </div>
   );
